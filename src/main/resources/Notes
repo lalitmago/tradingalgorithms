@@ -1,0 +1,91 @@
+LTFH -> L&TFH - Not traded in futures
+BAJAJ_AUTO -> BAJAJ-AUTO - Done
+COXKINGS -> COX&KINGS
+ILFSTRANS -> IL&FSTRANS
+BHARATFIN -> Not traded anymore (To be removed) - Done
+KPIT -> KPITTECH - Done
+BAJAJCORP -> BAJAJCON
+TIFIN -> CHOLAHLDNG
+MM -> M&M
+VIJAYABANK -> Not traded anymore (To be removed) - Done
+MMFIN -> M&MFIN
+IDFCBANK -> IDFCFIRSTB
+
+
+// TODO: 27/10/2019 - Rupesh/Arpit/Harshit's straddle strategies - Extra focus on risk mgmt aspects
+
+sell atm (redundant) straddle (based on the CMP)
+
+	 - sell call + sell put
+
++/- 2 in the option chain - add 2 straddles on each side
+
+portfolio = 5 straddles
+
+Up-move -> cut lower range and add higher range straddles so as to ensure that the portfolio always consists of ~5 straddles
+
+Down-move
+
+In case of sharp moves -
+    - stop loss triggered
+
+    20K -> 40K
+        - Volatility levels - completely unknown - act in time - Arpit's focus was on this point - current requirement
+        - Stop loss does not have any breathing space - definitely the case
+
+/* TODO: 27/10/2019 - Find the answer to this question. */
+    - Can IV be used? Should it be used?
+
+Program (At any point in time):
+    - Market Analysis (Identifies opportunities) + Risk Analysis (Protects your captial)
+    - Trades placed
+
+We have a portfolio
+    - Market Analysis (Slows down - Look for squaring off opportunities) + Risk Analysis (Continued - IV monitoring) - ??
+
+
+    {p1, p2, p3, p4, p5} -> long INFY ->
+    Steps:
+    - p1 - 1 million simulations -  -
+    - p2 - 1 million
+    - p3 -
+    ...
+    How will each simulation affect my portfolio?
+    After all possibilities are collected, I take out the worst possible 5% scenarios - 95%
+
+
+    Output - tomorrow we are 89% confident that we will loose no more than 15% of our overall captial
+
+    -> Market Analysis ->
+
+
+Machine learning
+
+    - Training + Prediction
+
+    Training - ?? Y = mX + c - m, c - values - 3 months (July-Oct) data m = 0.2 c = -0.75
+    Apr - June -> y (90% accurate) = x, m and c
+
+    Train once, use forever - this never works
+    28th Oct - use same values
+    29th Oct - use same values
+    30th Oct - use same values
+
+    Train weekly
+    25th July - 25th Oct - Trained - m = 0.2, c = -0.75
+    1st August - 1st November - m = 0.24 , c = -0.65
+    8th AUgust - 8th November -
+
+    Train Daily..?
+
+    Real-time training (Continuous learning) + prediction
+    25th July - 25th Oct - Trained - m = 0.2, c = -0.75 - Use minute-by-minute data to train for the first time
+    9th Nov - 10:00:05 AM - data - Train -> m, c values find out and then predict y based on the new values
+
+
+    OHLC - Hourly basis - PSO
+
+
+
+
+
