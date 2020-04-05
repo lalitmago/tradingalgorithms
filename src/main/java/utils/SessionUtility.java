@@ -7,19 +7,31 @@ import org.patriques.output.AlphaVantageException;
 import org.patriques.output.timeseries.Daily;
 import org.patriques.output.timeseries.data.StockData;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 public class SessionUtility {
 
     static AlphaVantageConnector connect() {
 
-        //File resourcesFile = new File(SessionUtility.class.getResource("session.properties").getFile());
+        AlphaVantageConnector apiConnector = null;
 
-        String apiKey = "XVS5Z390BRVUGXRG";
-        int timeOut = 3000;
+        try {
+            InputStream fileInputStream = SessionUtility.class.getResourceAsStream("session.properties");
+            Properties properties = new Properties();
 
-        AlphaVantageConnector apiConnector = new AlphaVantageConnector(apiKey, timeOut);
+            properties.load(fileInputStream);
+            String apiKey = properties.getProperty("source.apiKey");
+            String timeOut = properties.getProperty("source.timeout");
+
+            apiConnector = new AlphaVantageConnector(apiKey, Integer.parseInt(timeOut));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return apiConnector;
     }
 
