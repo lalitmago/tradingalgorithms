@@ -18,10 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class DataUtility {
 
-    //private static String baseLocation = "C:/Users/User/Documents/Trading And Investment/Data/Data-Futures/";
-    private static String baseLocation = "/home/lalit-mago/Documents/Trading And Investment/Data/Data-Futures/";
-
-    public void prepareData() {
+    public void prepareData(String baseLocation) {
         File symbolsFile = new File("configs/nse-futures-symbols.txt");
         String stockData;
         int i = 0;
@@ -93,7 +90,7 @@ public class DataUtility {
         }
     }
 
-    public static List<Double> getClosingPricesFromFiles(String eachStockDataFile) {
+    public static List<Double> getClosingPricesFromFiles(String baseLocation, String eachStockDataFile) {
 
         List<Double> closingPrices = new ArrayList<>();
         int count = 0;

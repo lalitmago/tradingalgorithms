@@ -6,6 +6,7 @@ import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealMatrixPreservingVisitor;
 import utils.DataUtility;
+import utils.SessionUtility;
 import utils.StatisticalOperationsUtility;
 import utils.StockOperationsUtility;
 
@@ -18,19 +19,34 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //File directory = new File("C:\\Users\\User\\Documents\\Trading And Investment\\Data\\Data-Futures");
-        File directory = new File("/home/lalit-mago/Documents/Trading And Investment/Data/Data-Futures");
+        File directory = null;
+        String location = "";
+
+        try {
+            InputStream fileInputStream = Main.class.getResourceAsStream("session.properties");
+            Properties properties = new Properties();
+
+            properties.load(fileInputStream);
+            location = properties.getProperty("data.location");
+            directory = new File(location);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         File[] listOfFiles = directory.listFiles();
+
         Map<String, Long> data = new HashMap<>();
         Multimap<String, Double> stocksAndClosingPrices = MultimapBuilder.treeKeys().arrayListValues().build();
 
         if (listOfFiles != null)
             Arrays.stream(listOfFiles).forEach(file -> data.put(file.getName(), getRowCount(file)));
         System.out.println(data.size());
+        final String baseLocation = location;
         data.forEach((key, value) -> {
             //System.out.println("Key : " + key + ", Row Count: " + value);
             //System.out.println();
-            stocksAndClosingPrices.putAll(key.split("\\.")[0], DataUtility.getClosingPricesFromFiles(key));
+            stocksAndClosingPrices.putAll(key.split("\\.")[0], DataUtility.getClosingPricesFromFiles(baseLocation, key));
         });
 
 
