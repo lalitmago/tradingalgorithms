@@ -23,7 +23,7 @@ public class Main {
         String location = "";
 
         try {
-            InputStream fileInputStream = Main.class.getResourceAsStream("session.properties");
+            InputStream fileInputStream = ClassLoader.getSystemClassLoader().getResourceAsStream("session.properties");
             Properties properties = new Properties();
 
             properties.load(fileInputStream);
@@ -62,18 +62,18 @@ public class Main {
 
         RealMatrix stocksReturnsMatrix = DataUtility.convertMultimapToMatrix(stocksAndReturns);
         System.out.println("===Stocks Returns Matrix===");
-        System.out.println(Arrays.deepToString(stocksReturnsMatrix.getData()));
+        //System.out.println(Arrays.deepToString(stocksReturnsMatrix.getData()));
 
         System.out.println("Correlation using stock prices");
         RealMatrix correlationMatrixStockPrice = StatisticalOperationsUtility.getCorrelationMatrix(stocksClosingPricesMatrix);
-        System.out.println("Rows : " + correlationMatrixStockPrice.getRowDimension() + ", Columns : " + correlationMatrixStockPrice.getColumnDimension());
-        System.out.println(Arrays.deepToString(correlationMatrixStockPrice.getData()));
+        //System.out.println("Rows : " + correlationMatrixStockPrice.getRowDimension() + ", Columns : " + correlationMatrixStockPrice.getColumnDimension());
+        //System.out.println(Arrays.deepToString(correlationMatrixStockPrice.getData()));
         System.out.println();
 
         System.out.println("Correlation using stock returns");
         RealMatrix correlationMatrixStockReturns = StatisticalOperationsUtility.getCorrelationMatrix(stocksReturnsMatrix);
-        System.out.println("Rows : " + correlationMatrixStockReturns.getRowDimension() + ", Column : " + correlationMatrixStockReturns.getColumnDimension());
-        System.out.println(Arrays.deepToString(correlationMatrixStockReturns.getData()));
+        //System.out.println("Rows : " + correlationMatrixStockReturns.getRowDimension() + ", Column : " + correlationMatrixStockReturns.getColumnDimension());
+        //System.out.println(Arrays.deepToString(correlationMatrixStockReturns.getData()));
 
 
     }

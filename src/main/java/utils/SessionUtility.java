@@ -20,7 +20,9 @@ public class SessionUtility {
         AlphaVantageConnector apiConnector = null;
 
         try {
-            InputStream fileInputStream = SessionUtility.class.getResourceAsStream("session.properties");
+            InputStream fileInputStream = ClassLoader.getSystemClassLoader().getResourceAsStream("session.properties");
+            //InputStream fileInputStream = SessionUtility.class.getResourceAsStream("session.properties");
+            System.out.println(fileInputStream == null);
             Properties properties = new Properties();
 
             properties.load(fileInputStream);
@@ -35,7 +37,7 @@ public class SessionUtility {
         return apiConnector;
     }
 
-    static void test() {
+    public static void test() {
         AlphaVantageConnector apiConnector = connect();
         TimeSeries stockTimeSeries = new TimeSeries(apiConnector);
 
